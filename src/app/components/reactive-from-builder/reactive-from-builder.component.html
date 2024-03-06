@@ -1,0 +1,50 @@
+
+<div class="container">
+  <div class="form-area mt-5">
+
+    <h1 class="text-center text-2xl font-semibold  mb-3">Reactive Form Builder</h1>
+
+    <form [formGroup]="form"  (ngSubmit)="onClick()">
+
+      <div class="form-group mt-3">
+        <input type="text"
+               class="form-control"
+               placeholder="username"
+               formControlName="username"
+        >
+
+        <div *ngIf="fg.username.errors?.required">
+          <div class="alert alert-danger" *ngIf="fg.username.touched && fg.username.invalid">  user name required</div>
+        </div>
+        <div *ngIf="fg.username.errors?.minLength">
+          <div class="alert alert-danger" *ngIf="fg.username.touched && fg.username.invalid">  user name  Length required</div>
+        </div>
+
+      </div>
+
+      <div class="form-group mt-3">
+        <input type="password"
+               class="form-control"
+               placeholder="password"
+               formControlName="password"
+        >
+
+        <div *ngIf="fg.password.errors?.required">
+          <div class="alert alert-danger" *ngIf="fg.password.touched && fg.password.invalid">  password name required</div>
+        </div>
+
+
+
+      </div>
+
+
+      <div class="mt-5">
+        <button type="submit"  [disabled]="form.invalid" class=" px-5 py-2 rounded w-full bg-blue-600 hover:bg-blue-600 text-white">Submit</button>
+
+      </div>
+
+
+
+    </form>
+  </div>
+</div>
