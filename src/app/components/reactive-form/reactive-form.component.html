@@ -11,6 +11,7 @@
                placeholder="FullName"
                class="form-control"
                name='fullName'
+              [ngClass]="{'is-invalid':fullName.touched && fullName.invalid}"
                formControlName= 'fullName'>
 
 
@@ -31,6 +32,7 @@
                placeholder="Email"
                class="form-control "
                formControlName="email"
+               [ngClass]="{'is-invalid':email.touched && email.invalid}"
                name="email">
 
         <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
@@ -47,15 +49,60 @@
                   cols="30" rows="10"
                   class="border-2 border-solid form-control"
                   formControlName="address"
-                  name="address"></textarea>
-
-
+                  name="address"
+                  [ngClass]="{'is-invalid':address.touched && address.invalid}"
+        ></textarea>
         <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
 
           <div *ngIf="address.errors.required "> Address Required</div>
 
         </div>
       </div>
+
+
+      <!--sub form group-->
+      <div formGroupName="contactDetails">
+
+
+
+        <div class="form-group mb-3">
+          <label>shipping Address</label>
+          <textarea placeholder="shipping Address"
+                    cols="30" rows="10"
+                    class="border-2 border-solid form-control"
+                    formControlName="shippingAddress"
+                    [ngClass]="{'is-invalid':shippingAddress.touched && shippingAddress.invalid}"
+                    name="shippingAddress"></textarea>
+
+          <div class="alert alert-danger" *ngIf="shippingAddress.touched && shippingAddress.invalid">
+
+            <div *ngIf="shippingAddress.errors.required "> shippingAddress Required</div>
+
+          </div>
+        </div>
+
+
+        <div class="form-group mb-3 ">
+          <label>Contact Number</label>
+          <input
+            type="text"
+            placeholder="Contact Number"
+            class="form-control"
+            name='contactNumber'
+            [ngClass]="{'is-invalid':contactNumber.touched && contactNumber.invalid}"
+            formControlName= 'contactNumber'>
+
+          <div class="alert alert-danger" *ngIf="contactNumber.touched && contactNumber.invalid">
+
+            <div *ngIf="contactNumber.errors.required "> contactNumber Required</div>
+            <div *ngIf="contactNumber.errors.pattern "> contactNumber patten not match</div>
+
+          </div>
+        </div>
+
+      </div>
+
+
 
       <button type="submit"  [disabled]="form.invalid" class=" px-5 py-2 rounded w-full bg-blue-600 hover:bg-blue-600 text-white">Submit</button>
     </form>
