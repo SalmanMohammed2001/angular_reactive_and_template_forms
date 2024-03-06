@@ -1,1 +1,66 @@
+<div class="container mt-5">
+  <div class="form-area">
+    <h1 class="text-center text-2xl font-semibold  mb-3">Reactive Form Form</h1>
 
+    <form [formGroup]="form"  (ngSubmit)="onSubmit()">
+
+      <div class="form-group mb-3 ">
+        <label>First Name</label>
+        <input
+          type="text"
+               placeholder="FullName"
+               class="form-control"
+               name='fullName'
+               formControlName= 'fullName'>
+
+
+
+          <div class="alert alert-danger" *ngIf="fullName.touched && fullName.invalid">
+
+            <div *ngIf="fullName.errors.required "> Full Name is Required</div>
+            <div *ngIf="fullName.errors?.minLength "> Full Name is must be least 5 latter long </div>
+          </div>
+
+
+      </div>
+
+
+      <div class="form-group mb-3 ">
+        <label>Email</label>
+        <input type="email"
+               placeholder="Email"
+               class="form-control "
+               formControlName="email"
+               name="email">
+
+        <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+
+          <div *ngIf="email.errors.required "> Email Required</div>
+          <div *ngIf="email.errors?.pattern"> Email Pattern not match </div>
+        </div>
+      </div>
+
+
+      <div class="form-group mb-3">
+        <label>Address</label>
+        <textarea placeholder="address"
+                  cols="30" rows="10"
+                  class="border-2 border-solid form-control"
+                  formControlName="address"
+                  name="address"></textarea>
+
+
+        <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+
+          <div *ngIf="address.errors.required "> Address Required</div>
+
+        </div>
+      </div>
+
+      <button type="submit"  [disabled]="form.invalid" class=" px-5 py-2 rounded w-full bg-blue-600 hover:bg-blue-600 text-white">Submit</button>
+    </form>
+
+  </div>
+
+
+</div>
