@@ -16,8 +16,11 @@
         <div *ngIf="fg.username.errors?.required">
           <div class="alert alert-danger" *ngIf="fg.username.touched && fg.username.invalid">  user name required</div>
         </div>
-        <div *ngIf="fg.username.errors?.minLength">
+        <div *ngIf="fg.username.errors?.minlength">
           <div class="alert alert-danger" *ngIf="fg.username.touched && fg.username.invalid">  user name  Length required</div>
+        </div>
+        <div *ngIf="fg.username.errors?.noSpaceValidator">
+          <div class="alert alert-danger" *ngIf="fg.username.touched && fg.username.invalid">  space not </div>
         </div>
 
       </div>
@@ -32,8 +35,6 @@
         <div *ngIf="fg.password.errors?.required">
           <div class="alert alert-danger" *ngIf="fg.password.touched && fg.password.invalid">  password name required</div>
         </div>
-
-
 
       </div>
 

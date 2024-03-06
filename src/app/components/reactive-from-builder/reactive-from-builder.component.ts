@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {noSpace} from "../../validitors/nospace.validators";
+
 
 @Component({
   selector: 'app-reactive-from-builder',
@@ -20,7 +22,8 @@ export class ReactiveFromBuilderComponent {
     this.form=fg.group({
       username:['',
         [Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(5),
+          noSpace.noSpaceValidation
         ]],
 
       password:['',[
