@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgClass, NgIf} from "@angular/common";
+import {FormArray, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from "@angular/forms";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-reactive-form',
   standalone: true,
-    imports: [
-        FormsModule,
-        NgIf,
-      NgClass,
-      ReactiveFormsModule,
-    ],
+  imports: [
+    FormsModule,
+    NgIf,
+    NgClass,
+    ReactiveFormsModule,
+    NgForOf,
+  ],
   templateUrl: './reactive-form.component.html',
   styleUrl: './reactive-form.component.scss'
 })
@@ -32,7 +33,6 @@ export class ReactiveFormComponent {
          Validators.pattern(this.emailPattern)
         // Validators.email
       ]),
-
       address:new FormControl('', Validators.required),
 
 
@@ -41,9 +41,11 @@ export class ReactiveFormComponent {
         shippingAddress:new FormControl('',[Validators.required]),
         contactNumber:new FormControl('',[Validators.required,
         Validators.pattern(this.contactRegex)
-        ] )
+        ])
 
-      })
+      }),
+
+      skills: new FormArray([])
 
     })
   }
@@ -64,9 +66,20 @@ export class ReactiveFormComponent {
   get contactNumber(){
     return this.form.get('contactDetails.contactNumber');
   }
+  get Skills(){
+    return this.form.get('skills') as FormArray;
+  }
+
 
 
   onSubmit(){
+    console.log(this.form.value)
+  }
+
+  addSkills(skills:HTMLInputElement){
+    this.Skills.push(new FormControl(skills.value))
+
+    skills.value=''
     console.log(this.form.value)
   }
 
