@@ -106,8 +106,9 @@
           <input type="text" class="form-control"  #skills (keyup.enter)="addSkills(skills)">
 
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let skill of Skills.controls">
+            <li class="list-group-item" *ngFor="let skill of Skills.controls; let i=index">
               {{skill.value}}
+              <a class="btn btn-sm btn-danger" (click)="removeSkills(i)">X</a>
             </li>
 
           </ul>
@@ -115,8 +116,6 @@
         </div>
 
       </div>
-
-
       <button type="submit"  [disabled]="form.invalid" class=" px-5 py-2 rounded w-full bg-blue-600 hover:bg-blue-600 text-white">Submit</button>
     </form>
 

@@ -82,5 +82,8 @@ export class ReactiveFormComponent {
     skills.value=''
     console.log(this.form.value)
   }
+  removeSkills(i:any){
+    this.Skills.removeAt(i)
+  }
 
 }
