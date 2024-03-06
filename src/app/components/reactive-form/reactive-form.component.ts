@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormArray, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators,FormBuilder} from "@angular/forms";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 
 @Component({
@@ -22,7 +22,8 @@ export class ReactiveFormComponent {
   emailPattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
   contactRegex='^07\\d{8}$'
 
-  constructor() {
+  //default method but code respect
+/*  constructor() {
     this.form= new FormGroup({
       fullName:new FormControl('',[
         Validators.required,
@@ -45,10 +46,41 @@ export class ReactiveFormComponent {
 
       }),
 
+      //array
       skills: new FormArray([])
 
     })
+  }*/
+
+  //advance method but no boiler plate code
+  constructor(fg:FormBuilder) {
+    this.form=fg.group({
+      fullName:['',[
+        Validators.required,
+        Validators.minLength(5)]],
+
+      email:['',[
+        Validators.required,
+        Validators.pattern(this.emailPattern)
+      ]],
+      address:['', Validators.required],
+
+//nested form group
+      contactDetails:fg.group({
+        shippingAddress:['',[Validators.required]],
+        contactNumber:['',[Validators.required,Validators.pattern(this.contactRegex)]],
+      }),
+
+      skills:fg.array([])
+
+    })
   }
+
+
+
+
+
+//  //default method but code respect
 
   get fullName(){
     return this.form.get('fullName')
@@ -71,6 +103,12 @@ export class ReactiveFormComponent {
   }
 
 
+
+
+  //advance method but no boiler plate code
+  get fg(){
+    return this.form.controls
+  }
 
   onSubmit(){
     console.log(this.form.value)
